@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Agregar Persona</title>
+  <style>
+    /* Importa una fuente moderna */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: url('https://mx.pinterest.com/pin/320459329754208506/') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+    
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #d50000; 
+    }
+    .campo {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    .error {
+      color: #d50000;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #d50000;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #a00000;
+    }
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #d50000;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Agregar Persona</h2>
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="campo">
+        <label for="id_nombre">Nombre:</label>
+        <input type="text" name="nombre" id="id_nombre" value="{{ form.nombre.value|default_if_none:'' }}">
+        {% if form.nombre.errors %}
+          <div class="error">
+            {% for error in form.nombre.errors %}
+              {{ error }}<br>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="campo">
+        <label for="id_edad">Edad:</label>
+        <input type="number" name="edad" id="id_edad" value="{{ form.edad.value|default_if_none:'' }}">
+        {% if form.edad.errors %}
+          <div class="error">
+            {% for error in form.edad.errors %}
+              {{ error }}<br>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="campo">
+        <label for="id_descripcion">Descripción:</label>
+        <textarea name="descripcion" id="id_descripcion">{{ form.descripcion.value|default_if_none:'' }}</textarea>
+        {% if form.descricion.errors %}
+          <div class="error">
+            {% for error in form.descripcion.errors %}
+              {{ error }}<br>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <button type="submit">Guardar</button>
+    </form>
+    <a href="lista_personas.html">Ver lista</a>
+  </div>
+</body>
+</html>
+

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Personas</title>
+  <style>
+    /* Fuente moderna */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+    /* Fondo y estilos globales */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: url('https://mx.pinterest.com/pin/320459329754208506/') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+    /* Contenedor con fondo semitransparente */
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #d50000;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: auto;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+    th {
+      background: #f4f4f4;
+    }
+    .btn {
+      padding: 8px 12px;
+      margin: 0 3px;
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .edit {
+      background: #ff9800;
+      color: #fff;
+    }
+    .delete {
+      background: #d50000;
+      color: #fff;
+    }
+    a.agregar {
+      display: block;
+      width: fit-content;
+      margin: 20px auto 0;
+      padding: 10px 20px;
+      background: #d50000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+    a.agregar:hover {
+      background: #a00000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Lista de Personas</h2>
+    <table>
+      <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+      {% for persona in personas %}
+      <tr>
+        <td>{{ persona.nombre }}</td>
+        <td>{{ persona.edad }}</td>
+        <td>{{ persona.descripcion }}</td>
+        <td>
+          <a href="{% url 'editar_persona' persona.id %}" class="btn edit">Editar</a>
+          <a href="{% url 'eliminar_persona' persona.id %}" class="btn delete">Eliminar</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <a href="{% url 'crear_persona' %}" class="agregar">Agregar Persona</a>
+  </div>
+</body>
+</html>
+

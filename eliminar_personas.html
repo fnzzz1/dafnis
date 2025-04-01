@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Persona</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
+        .box { border: 1px solid #ddd; padding: 20px; max-width: 400px; margin: auto; border-radius: 5px; }
+        button { background: red; color: white; padding: 10px; border: none; cursor: pointer; }
+        a { display: block; margin-top: 10px; color: blue; }
+    </style>
+</head>
+<body>
+    <h2>¿Seguro que quieres eliminar a {{ persona.nombre }}?</h2>
+    <div class="box">
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Sí, eliminar</button>
+        </form>
+        <a href="{% url 'lista_personas' %}">Cancelar</a>
+    </div>
+</body>
+</html>
+
