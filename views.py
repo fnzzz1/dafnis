@@ -1,39 +1,55 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Persona
-from .forms import PersonaForm
+from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpRequest
+from django.urls import path
 
-# Página de formulario
-def crear_persona(request):
-    if request.method == 'POST':
-        form = PersonaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('lista_personas')
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.sessions.backends.signed_cookies import SessionStore
+
+# Datos simulados de productos
+productos = {
+    1: {'nombre': 'Laptop', 'precio': 800},
+    2: {'nombre': 'Teléfono', 'precio': 500},
+    3: {'nombre': 'Tablet', 'precio': 300}
+}
+
+def index(request: HttpRequest):
+    return render(request, 'index.html', {'productos': productos})
+
+def agregar(request: HttpRequest, id: int):
+    if 'carrito' not in request.session:
+        request.session['carrito'] = {}
+    carrito = request.session['carrito']
+    
+    if str(id) in carrito:
+        carrito[str(id)]['cantidad'] += 1
     else:
-        form = PersonaForm()
-    return render(request, 'personas/crear_persona.html', {'form': form})
+        carrito[str(id)] = {'nombre': productos[id]['nombre'], 'precio': productos[id]['precio'], 'cantidad': 1}
+    
+    request.session.modified = True
+    return redirect('index')
 
-# Página de lista
-def lista_personas(request):
-    personas = Persona.objects.all()
-    return render(request, 'personas/lista_personas.html', {'personas': personas})
+def ver_carrito(request: HttpRequest):
+    carrito = request.session.get('carrito', {})
+    total = sum(item['precio'] * item['cantidad'] for item in carrito.values())
+    return render(request, 'carrito.html', {'carrito': carrito, 'total': total})
 
-# Editar persona
-def editar_persona(request, id):
-    persona = get_object_or_404(Persona, id=id)
-    if request.method == 'POST':
-        form = PersonaForm(request.POST, instance=persona)
-        if form.is_valid():
-            form.save()
-            return redirect('lista_personas')
-    else:
-        form = PersonaForm(instance=persona)
-    return render(request, 'personas/editar_persona.html', {'form': form})
+def vaciar_carrito(request: HttpRequest):
+    if 'carrito' in request.session:
+        del request.session['carrito']
+    return redirect('index')
 
-# Eliminar persona
-def eliminar_persona(request, id):
-    persona = get_object_or_404(Persona, id=id)
-    if request.method == 'POST':
-        persona.delete()
-        return redirect('lista_personas')
-    return render(request, 'personas/eliminar_persona.html', {'persona': persona})
+urlpatterns = [
+    path('', index, name='index'),
+    path('agregar/<int:id>/', agregar, name='agregar'),
+    path('carrito/', ver_carrito, name='carrito'),
+    path('vaciar/', vaciar_carrito, name='vaciar_carrito'),
+]
+
+def back (request):
+    return render(request, "cc.html")
+
+def dos (request):
+    return render(request, "dos.html")
+# Create your views here.
