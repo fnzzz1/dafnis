@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"> <!-- Define la codificación de caracteres para soportar caracteres especiales -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajusta el diseño para dispositivos móviles -->
+    <title>Tienda Online</title> <!-- Título de la página -->
+
+    <!-- Enlace a la hoja de estilos CSS -->
+    <link rel="stylesheet" href="/paginaM/comers/templates/static/styles.css">
+</head>
+<body>
+    <h1>Tienda Online</h1> <!-- Título principal de la página -->
+
+    <!-- Lista de productos disponibles -->
+    <ul class="productos">
+        <li class="producto">
+            <span class="nombre">Laptop</span> -  <!-- Nombre del producto -->
+            <span class="precio">$800</span>  <!-- Precio del producto -->
+            <!-- Enlace para agregar el producto al carrito con parámetros en la URL -->
+            <a class="boton" href="carrito.html?producto=Laptop&precio=800">Agregar al carrito</a>
+        </li>
+        <li class="producto">
+            <span class="nombre">Teléfono</span> - 
+            <span class="precio">$500</span>
+            <a class="boton" href="carrito.html?producto=Telefono&precio=500">Agregar al carrito</a>
+        </li>
+        <li class="producto">
+            <span class="nombre">Tablet</span> - 
+            <span class="precio">$300</span>
+            <a class="boton" href="carrito.html?producto=Tablet&precio=300">Agregar al carrito</a>
+        </li>
+    </ul>
+
+    <!-- Enlace para ver el carrito de compras -->
+    <a class="boton" href="carrito.html">Ver Carrito</a>
+</body>
+</html>
+
+

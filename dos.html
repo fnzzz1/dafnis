@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Carrito de Compras</h1>
+    <ul class="carrito">
+        {% for id, item in carrito.items %}
+            <li class="item">
+                <span class="nombre">{{ item.nombre }}</span> - 
+                <span class="precio">${{ item.precio }} x {{ item.cantidad }}</span> = 
+                <span class="total">${{ item.precio * item.cantidad }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+    <p class="total-carrito"><strong>Total:</strong> ${{ total }}</p>
+    <a class="boton" href="{% url 'vaciar_carrito' %}">Vaciar Carrito</a>
+    <a class="boton" href="{% url 'index' %}">Seguir Comprando</a>
+</body>
+</html>
