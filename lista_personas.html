@@ -90,9 +90,9 @@
       </tr>
       {% for persona in personas %}
       <tr>
-        <td>{{ persona.nombre }}</td>
-        <td>{{ persona.edad }}</td>
-        <td>{{ persona.descripcion }}</td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td>
           <a href="{% url 'editar_persona' persona.id %}" class="btn edit">Editar</a>
           <a href="{% url 'eliminar_persona' persona.id %}" class="btn delete">Eliminar</a>

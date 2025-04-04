@@ -4,19 +4,17 @@
   <meta charset="UTF-8">
   <title>Agregar Persona</title>
   <style>
-    /* Importa una fuente moderna */
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
-    
     body {
       margin: 0;
       padding: 0;
       font-family: 'Roboto', sans-serif;
-      background: url('https://mx.pinterest.com/pin/320459329754208506/') no-repeat center center fixed;
+      background: url('https://i.pinimg.com/originals/30/5b/3f/305b3f63de6b93e0f845c5ec19d5e4e4.jpg') no-repeat center center fixed;
       background-size: cover;
       color: #333;
     }
-    
+
     .container {
       background: rgba(255, 255, 255, 0.9);
       max-width: 500px;
@@ -28,7 +26,7 @@
     h2 {
       text-align: center;
       margin-bottom: 20px;
-      color: #d50000; 
+      color: #d50000;
     }
     .campo {
       margin-bottom: 15px;
@@ -89,7 +87,7 @@
 
       <div class="campo">
         <label for="id_nombre">Nombre:</label>
-        <input type="text" name="nombre" id="id_nombre" value="{{ form.nombre.value|default_if_none:'' }}">
+        <input type="text" name="nombre" id="id_nombre" value="{{ form.nombre.value|default:'' }}">
         {% if form.nombre.errors %}
           <div class="error">
             {% for error in form.nombre.errors %}
@@ -101,7 +99,7 @@
 
       <div class="campo">
         <label for="id_edad">Edad:</label>
-        <input type="number" name="edad" id="id_edad" value="{{ form.edad.value|default_if_none:'' }}">
+        <input type="number" name="edad" id="id_edad" value="{{ form.edad.value|default:'' }}">
         {% if form.edad.errors %}
           <div class="error">
             {% for error in form.edad.errors %}
@@ -113,8 +111,8 @@
 
       <div class="campo">
         <label for="id_descripcion">Descripción:</label>
-        <textarea name="descripcion" id="id_descripcion">{{ form.descripcion.value|default_if_none:'' }}</textarea>
-        {% if form.descricion.errors %}
+        <textarea name="descripcion" id="id_descripcion">{{ form.descripcion.value|default:'' }}</textarea>
+        {% if form.descripcion.errors %}
           <div class="error">
             {% for error in form.descripcion.errors %}
               {{ error }}<br>
